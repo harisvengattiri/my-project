@@ -3,7 +3,7 @@
 require 'vendor/autoload.php';
 
 use ApiCache\JewelleryCache;
-use ApiCache\mapsCache;
+use ApiCache\MapsCache;
 
 if(isset($_POST['apiType'])) {
     $origin = $_POST['origin'];
@@ -11,13 +11,13 @@ if(isset($_POST['apiType'])) {
     $apiType = $_POST['apiType'];
 }
 
-if($apiType == 'Jwellery') {
+if($apiType == 'Jewellery') {
     $params = date('d/m/Y');
     $cache = new JewelleryCache();
     return $responseData = $cache->getResponse($params);
     
 } else if ($apiType == 'Map') {
     $params = [$origin, $destination];
-    $cache = new mapsCache();
+    $cache = new MapsCache();
     echo $responseData = $cache->getResponse($params);
 }
