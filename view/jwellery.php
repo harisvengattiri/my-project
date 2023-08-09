@@ -1,5 +1,5 @@
 <?php
-$apiType = 'Jwellery';
+$apiType = 'Jewellery';
 require_once '../api.php';
 $gold_rate = $responseData;
 ?>
