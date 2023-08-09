@@ -2,7 +2,7 @@
 
 namespace ApiCache;
 
-class mapsCache extends Cache {
+class MapsCache extends Cache {
     
     public function getApiUrl($params) {
         
