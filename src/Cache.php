@@ -37,7 +37,9 @@ class Cache {
         if ($cachedData !== false) {
             return $cachedData;
         } else {
-            return $responseData = $this->searchApiResponse($url, $key, $parameters);
+            $responseData = $this->searchApiResponse($url, $key, $parameters);
+            $this->set($key, $responseData);
+            return $responseData;
         }
     }
     
