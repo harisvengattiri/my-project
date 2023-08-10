@@ -39,7 +39,6 @@ class JewelleryCache extends Cache {
             $gold_rate = $goldPriceINRPerGram;
         
         $data = $gold_rate;
-        $this->set($key, $data);
         return $data;
         }
     }
