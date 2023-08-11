@@ -37,10 +37,14 @@ class Cache {
         if ($cachedData !== false) {
             return $cachedData;
         } else {
-            $responseData = $this->searchApiResponse($url, $key, $parameters);
-            $this->set($key, $responseData);
-            return $responseData;
+            return $this->getCustomResponse($url, $key, $parameters);
         }
+    }
+
+    public function getCustomResponse($url, $key, $parameters) {
+        $responseData = $this->searchApiResponse($url, $key, $parameters);
+        $this->set($key, $responseData);
+        return $responseData;
     }
     
     public function searchApiResponse($url, $key, $parameters) {
