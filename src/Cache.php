@@ -21,7 +21,7 @@ class Cache {
     public function getApiParameterValues($parameters) {
         $query = parse_url($parameters, PHP_URL_QUERY);
         parse_str($query, $params);
-    return $params;
+        return $params;
     }
     
     public function getResponse($params) {
