@@ -4,28 +4,19 @@ namespace ApiCache;
 
 class MapsCache extends Cache {
     
-    public function getApiUrl($params) {
-        
-        $origin = $params[0];
-        $destination = $params[1];
-        $base_url = 'https://nominatim.openstreetmap.org/search?origin='.$origin.'&destination='.$destination;
-        
+    public function getApiUrl() {
+        $base_url = 'https://nominatim.openstreetmap.org/search';
         return $base_url;
     }
     
-    public function getApiParameters($url) {
-        
-        $queryString = parse_url($url, PHP_URL_QUERY);
-        parse_str($queryString, $params);
+    public function getApiParameters($params) {
         $parameters[] = $params['origin'];
         $parameters[] = $params['destination'];
-        
         return $parameters;
     }
     
-    public function searchApiResponse($url, $key, $parameters) {
+    public function getApiResponse($url, $parameters) {
         foreach($parameters as $param) {
-            
             $data[] = $this->geocode($param);
         }
         $latLonValues = array();
