@@ -10,46 +10,25 @@ class Cache {
         $this->database = new Database();
     }
     
-    public function getApiUrl($params) {
-        
-    }
+    public function getApiUrl() {}
     
-    public function getApiParameters($url) {
-        
-    }
-    
-    public function getApiParameterValues($parameters) {
-        $query = parse_url($parameters, PHP_URL_QUERY);
-        parse_str($query, $params);
-        return $params;
-    }
+    public function getApiParameters($params) {}
     
     public function getResponse($params) {
-        
-        $url = $this->getApiUrl($params);
-        
-        $parameters = $this->getApiParameters($url);
-
+        $url = $this->getApiUrl();
+        $parameters = $this->getApiParameters($params);
         $key = $this->generateKey($url.$parameters);
-        
         $cachedData = $this->get($key);
-        
         if ($cachedData !== false) {
             return $cachedData;
         } else {
-            return $this->getCustomResponse($url, $key, $parameters);
+            $responseData = $this->getApiResponse($url, $parameters);
+            $this->set($key, $responseData);
+            return $responseData;
         }
     }
-
-    public function getCustomResponse($url, $key, $parameters) {
-        $responseData = $this->searchApiResponse($url, $key, $parameters);
-        $this->set($key, $responseData);
-        return $responseData;
-    }
     
-    public function searchApiResponse($url, $key, $parameters) {
-        
-    }
+    public function getApiResponse($url, $parameters) {}
     
     public function generateKey($url) {
         $key = hash('sha256', $url);
@@ -57,15 +36,12 @@ class Cache {
     }
 
     public function get($key) {
-        
         $data = $this->database->get($key);
-
-        if ($data) { return $data; }
-        return false;
+        if(!$data) {return false; }
+        else if ($data) { return $data; }
     }
 
     public function set($key, $data) {
-        
         $this->database->set($key, $data);
     }
 }
